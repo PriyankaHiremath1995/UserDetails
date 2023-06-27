@@ -1,26 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, CardTitle, CardBody } from "reactstrap";
 import Avatar from "react-avatar";
 import { useNavigate } from "react-router-dom";
 
-import users from "./Data";
-import background from "./abstract-simple-wave-blue-background-free-vector.jpg";
+import users from "../configs/Data";
+import background from "../images/abstract-simple-wave-blue-background-free-vector.jpg";
 
 const List = () => {
   const navigate = useNavigate();
+  const pickRandomTwoUsers = (Ids, currentUserId) => {
+    // Filter the array to remove the excludeNumber
+    const filteredArray = Ids.filter((num) => num !== currentUserId);
+
+    // Generate random indices
+    const index1 = Math.floor(Math.random() * filteredArray.length);
+    let index2 = Math.floor(Math.random() * (filteredArray.length - 1));
+
+    // Adjust index2 if it overlaps with index1
+    if (index2 >= index1) {
+      index2++;
+    }
+
+    localStorage.setItem(
+      "RandomUsers",
+      JSON.stringify([filteredArray[index1], filteredArray[index2]])
+    );
+
+    return [filteredArray[index1], filteredArray[index2]];
+  };
 
   const user = () => {
     const usersList = users.map((eachUser) => {
       return (
         <div
           style={{ marginTop: "10px", cursor: "pointer" }}
-          onClick={() =>
-            navigate("/profile", {
-              state: {
-                user: eachUser,
-              },
-            })
-          }
+          onClick={() => {
+            localStorage.setItem("currentUser", JSON.stringify(eachUser));
+            navigate("/profile");
+            pickRandomTwoUsers(
+              JSON.parse(localStorage.getItem("Ids")),
+              eachUser.id
+            );
+          }}
         >
           <Avatar
             maxInitials={2}
@@ -33,7 +54,7 @@ const List = () => {
           {eachUser.name}
           <div
             style={{
-              borderBottom: "1px solid #E8E6E5",
+              borderBottom: "1px solid #A9A9A9",
               padding: "5px",
             }}
           ></div>
@@ -42,6 +63,12 @@ const List = () => {
     });
     return usersList;
   };
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("currentUser")) !== null) {
+      navigate("/profile");
+    }
+  }, []);
 
   return (
     <div
@@ -61,12 +88,13 @@ const List = () => {
           marginRight: "auto",
           borderRadius: "50px",
           backgroundColor: "white",
+          alignContent: "center",
         }}
       >
         <CardBody>
           <CardTitle
             style={{
-              backgroundColor: "#E8E6E5",
+              backgroundColor: "#A9A9A9",
               width: "auto",
               height: "6rem",
               textAlign: "center",

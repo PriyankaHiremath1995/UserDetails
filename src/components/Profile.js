@@ -1,19 +1,13 @@
 import React, { useState } from "react";
 import Avatar from "react-avatar";
-import { useLocation } from "react-router-dom";
-import { Card, Nav, NavItem, NavLink } from "reactstrap";
-import { useNavigate } from "react-router-dom";
 
-import googlemap from "./googlemap.png";
+import googlemap from "../images/googlemap.png";
 import UserCard from "./UserCard";
 
 const Profile = () => {
   const [showUserCard, setShowUserCard] = useState(false);
 
-  const navigate = useNavigate();
-
-  const location = useLocation();
-  let user = location.state.user;
+  let user = JSON.parse(localStorage.getItem("currentUser"));
   const { lat, lng } = user.address.geo;
 
   return (
@@ -22,10 +16,10 @@ const Profile = () => {
         style={{
           display: "flex",
           margin: "18px 0px 0px 0px",
-          borderBottom: "1px solid #E8E6E5",
+          borderBottom: "1px solid #A9A9A9",
         }}
       >
-        <div style={{ padding: "10px 20px 10px 50px" }}>
+        <div style={{ padding: "10px 20px 10px 50px", fontSize: "25px" }}>
           <b>Profile</b>
         </div>
         <div
@@ -49,45 +43,8 @@ const Profile = () => {
           margin: "18px 0px 0px 0px",
         }}
       >
-        <Card
-          style={{
-            boxShadow: "0 0 10px 0 rgba(100, 100, 100, 0.26)",
-            width: "100px",
-            height: "500px",
-            borderRadius: "30px",
-            zIndex: "100",
-            position: "absolute",
-            backgroundColor: "#0000CD",
-          }}
-        >
-          <Nav style={{ paddingTop: "100px", color: "white" }}>
-            <NavItem
-              style={{ borderBottom: "0.5px solid white", padding: "10px" }}
-            >
-              Profile
-            </NavItem>
-            <NavItem
-              style={{ borderBottom: "0.5px solid white", padding: "10px" }}
-              onClick={() => navigate("/posts")}
-            >
-              Posts
-            </NavItem>
-            <NavItem
-              style={{ borderBottom: "0.5px solid white", padding: "10px" }}
-              onClick={() => navigate("/gallery")}
-            >
-              Gallery
-            </NavItem>
-            <NavItem
-              style={{ borderBottom: "0.5px solid white", padding: "10px" }}
-              onClick={() => navigate("/todo")}
-            >
-              ToDo
-            </NavItem>
-          </Nav>
-        </Card>
-        <div style={{ textAlign: "center", paddingLeft: "100px" }}>
-          <div style={{ marginTop: "10px", borderBottom: "1px solid #E8E6E5" }}>
+        <div style={{ textAlign: "center", paddingLeft: "150px" }}>
+          <div style={{ marginTop: "10px", borderBottom: "1px solid #A9A9A9" }}>
             <Avatar
               maxInitials={2}
               src={user.profilepicture}
@@ -99,7 +56,7 @@ const Profile = () => {
               <b>{user.name}</b>
             </div>
             <div style={{ marginTop: "10px" }}>
-              <label style={{ color: "#E8E6E5" }}>
+              <label style={{ color: "#A9A9A9" }}>
                 <b>Username :</b>
               </label>
               <label className="ml-2" style={{ padding: "10px" }}>
@@ -107,7 +64,7 @@ const Profile = () => {
               </label>
             </div>
             <div style={{ marginTop: "10px" }}>
-              <label style={{ color: "#E8E6E5" }}>
+              <label style={{ color: "#A9A9A9" }}>
                 <b>e-mail :</b>
               </label>
               <label className="ml-2" style={{ marginLeft: "10px" }}>
@@ -115,7 +72,7 @@ const Profile = () => {
               </label>
             </div>
             <div style={{ marginTop: "10px" }}>
-              <label style={{ color: "#E8E6E5" }}>
+              <label style={{ color: "#A9A9A9" }}>
                 <b>Phone :</b>
               </label>
               <label className="ml-2" style={{ marginLeft: "10px" }}>
@@ -123,7 +80,7 @@ const Profile = () => {
               </label>
             </div>
             <div style={{ marginTop: "10px", marginBottom: "10px" }}>
-              <label style={{ color: "#E8E6E5" }}>
+              <label style={{ color: "#A9A9A9" }}>
                 <b>Website :</b>
               </label>
               <label className="ml-2" style={{ marginLeft: "10px" }}>
@@ -136,13 +93,13 @@ const Profile = () => {
               style={{
                 marginLeft: "50px",
                 marginTop: "10px",
-                color: "#E8E6E5",
+                color: "#A9A9A9",
               }}
             >
               <b>Company</b>
             </div>
             <div style={{ marginTop: "10px" }}>
-              <label style={{ color: "#E8E6E5" }}>
+              <label style={{ color: "#A9A9A9" }}>
                 <b>Name :</b>
               </label>
               <label className="ml-2" style={{ padding: "10px" }}>
@@ -150,7 +107,7 @@ const Profile = () => {
               </label>
             </div>
             <div style={{ marginTop: "10px" }}>
-              <label style={{ color: "#E8E6E5" }}>
+              <label style={{ color: "#A9A9A9" }}>
                 <b>catchphrase :</b>
               </label>
               <label className="ml-2" style={{ marginLeft: "10px" }}>
@@ -158,7 +115,7 @@ const Profile = () => {
               </label>
             </div>
             <div style={{ marginTop: "10px" }}>
-              <label style={{ color: "#E8E6E5" }}>
+              <label style={{ color: "#A9A9A9" }}>
                 <b>bs :</b>
               </label>
               <label className="ml-2" style={{ marginLeft: "10px" }}>
@@ -169,11 +126,11 @@ const Profile = () => {
         </div>
         <div
           style={{
-            borderLeft: "1px solid #E8E6E5",
+            borderLeft: "1px solid #A9A9A9",
             marginLeft: "50px",
           }}
         >
-          <div style={{ paddingLeft: "700px" }}>
+          <div style={{ paddingLeft: "600px" }}>
             {showUserCard && <UserCard user={user} />}
           </div>
 
@@ -181,13 +138,13 @@ const Profile = () => {
             style={{
               marginLeft: "30px",
               marginTop: "10px",
-              color: "#E8E6E5",
+              color: "#A9A9A9",
             }}
           >
             <b>Address : </b>
           </div>
           <div style={{ marginTop: "10px", marginLeft: "30px" }}>
-            <label style={{ color: "#E8E6E5" }}>
+            <label style={{ color: "#A9A9A9" }}>
               <b>Street :</b>
             </label>
             <label className="ml-2" style={{ padding: "10px" }}>
@@ -195,7 +152,7 @@ const Profile = () => {
             </label>
           </div>
           <div style={{ marginTop: "10px", marginLeft: "30px" }}>
-            <label style={{ color: "#E8E6E5" }}>
+            <label style={{ color: "#A9A9A9" }}>
               <b>Suite :</b>
             </label>
             <label className="ml-2" style={{ marginLeft: "10px" }}>
@@ -203,7 +160,7 @@ const Profile = () => {
             </label>
           </div>
           <div style={{ marginTop: "10px", marginLeft: "30px" }}>
-            <label style={{ color: "#E8E6E5" }}>
+            <label style={{ color: "#A9A9A9" }}>
               <b>City :</b>
             </label>
             <label className="ml-2" style={{ marginLeft: "10px" }}>
@@ -211,7 +168,7 @@ const Profile = () => {
             </label>
           </div>
           <div style={{ marginTop: "10px", marginLeft: "30px" }}>
-            <label style={{ color: "#E8E6E5" }}>
+            <label style={{ color: "#A9A9A9" }}>
               <b>Zipcode :</b>
             </label>
             <label className="ml-2" style={{ marginLeft: "10px" }}>
@@ -231,7 +188,7 @@ const Profile = () => {
             }}
           >
             <div>
-              <label style={{ color: "#E8E6E5" }}>
+              <label style={{ color: "#A9A9A9" }}>
                 <b> Lat:</b>
               </label>
               <label className="ml-2" style={{ marginLeft: "10px" }}>
@@ -239,7 +196,7 @@ const Profile = () => {
               </label>
             </div>
             <div style={{ marginLeft: "10px" }}>
-              <label style={{ color: "#E8E6E5" }}>
+              <label style={{ color: "#A9A9A9" }}>
                 <b> Long:</b>
               </label>
               <label className="ml-2" style={{ marginLeft: "10px" }}>

@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// const Data = async () => {
 const dataValues = await axios({
   url: "https://panorbit.in/api/users.json",
   method: "get",
@@ -8,7 +7,7 @@ const dataValues = await axios({
 const { data } = dataValues;
 const { users } = data;
 
-//   return users;
-// };
+const allUserId = users.map((user) => user.id);
 
+localStorage.setItem("Ids", JSON.stringify(allUserId));
 export default users;
