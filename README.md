@@ -19,7 +19,7 @@ You may also see any lint errors in the console.
   All the data related files will be saved in the configs folder
   All the used images will be saved in the images folder
 
-# Namming conventions
+# Naming conventions
 
 - Folder names should be saved in lowercase
 - React Component should be UpperCamelCase

@@ -3,11 +3,13 @@ import { Card, CardTitle, CardBody } from "reactstrap";
 import Avatar from "react-avatar";
 import { useNavigate } from "react-router-dom";
 
-import users from "../configs/Data";
 import background from "../images/abstract-simple-wave-blue-background-free-vector.jpg";
+
+import users from "../configs/Data";
 
 const List = () => {
   const navigate = useNavigate();
+
   const pickRandomTwoUsers = (Ids, currentUserId) => {
     // Filter the array to remove the excludeNumber
     const filteredArray = Ids.filter((num) => num !== currentUserId);
@@ -30,6 +32,7 @@ const List = () => {
   };
 
   const user = () => {
+    //Fetch the list of users
     const usersList = users.map((eachUser) => {
       return (
         <div
